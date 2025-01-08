@@ -1,46 +1,49 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose');
 
-const TeamSchema= mongoose.UserSchema({
-    name:{
-        type: String,
-        required:true
-        },
-    
-    image:{
-        type:String,
-        required:true
-    },
-
-    phone:{
-        type: Number,
-        required:true
-    },
-
-    email:{
-        type: String,
-        unique: true
-    },
-
-    slug:{
+const TeamSchema = new mongoose.Schema({
+    name: {
         type: String,
         required: true
     },
-    activationtoken: String,
-    activationfor: Date,
-    forgettoken: String,
-    forgetfor: Date,
-    createdby: String  
+    image: {
+        type: String,
+        required: true
     },
-    {
-    timestamps:true,
+    phone: {
+        type: Number,
+        required: true
+    },
+    email: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    slug: {
+        type: String,
+        required: true
+    },
+    activationtoken: {
+        type: String
+    },
+    activatedfor: {
+        type: Date
+    },
+    forgettoken: {
+        type: String
+    },
+    forgetfor: {
+        type: Date
+    },
+    createdby: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Team' // Assuming team members can create other team members
+    }
+}, {
+    timestamps: true,
     autoIndex: true,
     autoCreate: true
-    
 });
 
-const TeamModel = mongoose.model("Team", TeamSchema)
+const TeamModel = mongoose.model('Team', TeamSchema);
 
-module.exports = TeamModel
-
-
-
+module.exports = TeamModel;

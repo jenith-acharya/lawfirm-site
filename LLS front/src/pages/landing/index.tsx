@@ -5,6 +5,7 @@ import Aboutuspage from "../About Us";
 import Areasofpractice from "../Areasofpractice";
 import Footercomponent from "../../components/common/footer/Footer.tsx";
 import Contactform from "../contactpage/index.tsx";
+import Ourteam from "../Our Team/index.tsx";
 
 const Landingpage=() => {
 
@@ -21,6 +22,7 @@ const Landingpage=() => {
         <Heading1> Areas of Practice</Heading1>
         <Areasofpractice/>
         <br/>
+        <Ourteam/>
         <br/>
         <Contactform/>
         
