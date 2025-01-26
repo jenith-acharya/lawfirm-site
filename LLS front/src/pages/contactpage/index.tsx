@@ -1,6 +1,16 @@
+import {useState} from "react";
 
 const Contactform = () => {
-  return (
+    const [name,setname] = useState("");
+    const [email,setemail] = useState("");
+    const [message,setmessage] = useState("");
+    const [subject, setsubject] = useState("");
+
+    const handleSubmit = (e: any) =>{
+        e.preventdefault();
+    }
+
+    return (
     
     <div className="grid sm:grid-cols-2 items-start gap-16 p-4 mx-auto max-w-4xl bg-white font-[sans-serif]">
             
@@ -66,16 +76,16 @@ const Contactform = () => {
                 </div>
             </div>
 
-            <form className="ml-auto space-y-4">
-                <input type='text' placeholder='Name'
+            <form onSubmit={handleSubmit} className="ml-auto space-y-4">
+                <input type='text' placeholder='Name' value={name} onChange={(e)=> setname(e.target.value)}
                     className="w-full rounded-md py-3 px-4 bg-gray-100 text-gray-800 text-sm outline-red-800 focus:bg-transparent" />
-                <input type='email' placeholder='Email'
+                <input type='email' placeholder='Email' value={email} onChange={(e)=> setemail(e.target.value)}
                     className="w-full rounded-md py-3 px-4 bg-gray-100 text-gray-800 text-sm outline-red-800 focus:bg-transparent" />
-                <input type='text' placeholder='Subject'
+                <input type='text' placeholder='Subject' value={subject} onChange={(e)=> setsubject(e.target.value)}
                     className="w-full rounded-md py-3 px-4 bg-gray-100 text-gray-800 text-sm outline-red-800 focus:bg-transparent" />
-                <textarea placeholder='Message' rows={6}
+                <textarea placeholder='Message' rows={6} value={message} onChange={(e)=> setmessage(e.target.value)}
                     className="w-full rounded-md px-4 bg-gray-100 text-gray-800 text-sm pt-3 outline-red-800 focus:bg-transparent"></textarea>
-                <button type='button'
+                <button type='button' 
                     className="text-white bg-red-800 hover:bg-red-600 tracking-wide rounded-md text-sm px-4 py-3 w-full !mt-6">Send</button>
             </form>
         </div>
