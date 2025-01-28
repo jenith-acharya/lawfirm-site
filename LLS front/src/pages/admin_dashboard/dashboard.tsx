@@ -34,11 +34,11 @@ const AdminPanel = () => {
   const [members, setMembers] = useState<Member[]>([
     {
       id: 1,
-      name: "John Doe",
+      name: "Jenith Sharma Acharya",
       title: "Senior Developer",
-      email: "john@example.com",
-      phone: "+1 234 567 8900",
-      photo: "/api/placeholder/100/100",
+      email: "jenithacharya8@gmail.com",
+      phone: "+977 9866660289",
+      photo: "jenith.png",
       description: "Experienced developer with 10 years of experience"
     }
   ]);
@@ -48,7 +48,7 @@ const AdminPanel = () => {
       id: 1,
       title: "Getting Started with React",
       description: "Learn the basics of React",
-      author: "John Doe",
+      author: "Jenith Sharma Acharya",
       date: "2025-01-28"
     }
   ]);
@@ -117,7 +117,7 @@ const AdminPanel = () => {
               </button>
               <button
                 type="submit"
-                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                className="px-4 py-2 bg-red-800 text-white rounded hover:bg-red-900"
               >
                 {editingItem ? 'Update' : 'Create'}
               </button>
@@ -154,11 +154,11 @@ const AdminPanel = () => {
                       setEditingItem(member);
                       setIsModalOpen(true);
                     }}
-                    className="p-2 text-blue-600 hover:bg-blue-50 rounded"
+                    className="p-2 text-red-800 hover:bg-red-50 rounded"
                   >
                     <Edit2 size={16} />
                   </button>
-                  <button className="p-2 text-red-600 hover:bg-red-50 rounded">
+                  <button className="p-2 text-red-800 hover:bg-red-50 rounded">
                     <Trash2 size={16} />
                   </button>
                 </div>
@@ -187,11 +187,11 @@ const AdminPanel = () => {
                         setEditingItem(blog);
                         setIsModalOpen(true);
                       }}
-                      className="p-2 text-blue-600 hover:bg-blue-50 rounded"
+                      className="p-2 text-red-800 hover:bg-red-50 rounded"
                     >
                       <Edit2 size={16} />
                     </button>
-                    <button className="p-2 text-red-600 hover:bg-red-50 rounded">
+                    <button className="p-2 text-red-800 hover:bg-red-50 rounded">
                       <Trash2 size={16} />
                     </button>
                   </div>
@@ -218,11 +218,11 @@ const AdminPanel = () => {
                         setEditingItem(practice);
                         setIsModalOpen(true);
                       }}
-                      className="p-2 text-blue-600 hover:bg-blue-50 rounded"
+                      className="p-2 text-red-800 hover:bg-red-50 rounded"
                     >
                       <Edit2 size={16} />
                     </button>
-                    <button className="p-2 text-red-600 hover:bg-red-50 rounded">
+                    <button className="p-2 text-red-800 hover:bg-red-50 rounded">
                       <Trash2 size={16} />
                     </button>
                   </div>
@@ -247,7 +247,7 @@ const AdminPanel = () => {
               setEditingItem(null);
               setIsModalOpen(true);
             }}
-            className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+            className="flex items-center space-x-2 bg-red-800 text-white px-4 py-2 rounded-lg hover:bg-red-900"
           >
             <Plus size={16} />
             <span>Add New</span>
@@ -271,7 +271,7 @@ const AdminPanel = () => {
           <button
             onClick={() => setActiveSection('team')}
             className={`flex items-center space-x-2 w-full px-4 py-2 text-left ${
-              activeSection === 'team' ? 'bg-blue-50 text-blue-600' : 'hover:bg-gray-50'
+              activeSection === 'team' ? 'bg-red-50 text-red-800' : 'hover:bg-gray-50'
             }`}
           >
             <Users size={20} />
@@ -280,7 +280,7 @@ const AdminPanel = () => {
           <button
             onClick={() => setActiveSection('blogs')}
             className={`flex items-center space-x-2 w-full px-4 py-2 text-left ${
-              activeSection === 'blogs' ? 'bg-blue-50 text-blue-600' : 'hover:bg-gray-50'
+              activeSection === 'blogs' ? 'bg-red-50 text-red-800' : 'hover:bg-gray-50'
             }`}
           >
             <BookOpen size={20} />
@@ -289,7 +289,7 @@ const AdminPanel = () => {
           <button
             onClick={() => setActiveSection('practices')}
             className={`flex items-center space-x-2 w-full px-4 py-2 text-left ${
-              activeSection === 'practices' ? 'bg-blue-50 text-blue-600' : 'hover:bg-gray-50'
+              activeSection === 'practices' ? 'bg-red-50 text-red-800' : 'hover:bg-gray-50'
             }`}
           >
             <Briefcase size={20} />
