@@ -12,35 +12,8 @@ class BlogService {
         }
     };
     
-    // List all blog posts with pagination and filtering
-    listData = async (currentPage, limit, filter = {}) => {
-        try {
-            const count = await BlogModel.countDocuments(filter);
-            const skip = (currentPage - 1) * limit;
-            const data = await BlogModel.find(filter)
-                .populate("createdby", ["_id", "name", "email"])
-                .skip(skip)
-                .limit(limit)
-                .sort({ _id: -1 });
-            let totalPages = Math.ceil(count / limit);
-            return { data, count, totalPages };
-        } catch (exception) {
-            throw exception;
-        }
-    };
     
-    // Get details of a blog post by filter
-    getDetailByFilter = async (filter) => {
-        try {
-            const blogDetail = await BlogModel.findOne(filter).populate("createdby", ["_id", "name", "email"]);
-            if (!blogDetail) {
-                throw { statusCode: 404, message: "Blog post not found" };
-            }
-            return blogDetail;
-        } catch (exception) {
-            throw exception;
-        }
-    };
+    
     
     // Delete a blog post by ID
     deleteById = async (id) => {
