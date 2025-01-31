@@ -1,10 +1,10 @@
 import {useState} from "react";
 
 const Contactform = () => {
-    const [name,setname] = useState("");
-    const [email,setemail] = useState("");
-    const [message,setmessage] = useState("");
-    const [subject, setsubject] = useState("");
+    const [name,setname] = useState<string>("");
+    const [email,setemail] = useState<string>("");
+    const [message,setmessage] = useState<string>("");
+    const [subject, setsubject] = useState<string>("");
 
     const handleSubmit = (e: any) =>{
         e.preventdefault();

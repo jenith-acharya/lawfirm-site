@@ -20,7 +20,8 @@ const Aboutuspage = () => {
                 Since 1984, Legacy Legal Services has been a distinguished provider of legal expertise in Nepal, offering more than 40 years of trusted counsel and advocacy. Our firm’s name, Legacy, signifies our enduring commitment to excellence and the aspiration to pass on a tradition of trust, integrity, and legal expertise to future generations.
 
 We focus primarily on litigation, handling complex disputes across diverse sectors. Additionally, we provide representation in domestic and international arbitration, ensuring that our clients benefit from efficient dispute resolution, both locally and abroad.<br/>
-    <br/>                                                                                   <div className="flex justify-end"> <Button href="/about" style={{width:200, height:45}} className="bg-red-800 size-3/12 hover:bg-red-600 transition-transform duration-300 hover:scale-105">READ MORE ABOUT US</Button>
+    <br/> 
+    <div className="flex justify-end"> <Button href="/about" style={{width:200, height:45}} className="bg-red-800 size-3/12 hover:bg-red-600 transition-transform duration-300 hover:scale-105">READ MORE ABOUT US</Button>
     </div>
                 </p>
                 

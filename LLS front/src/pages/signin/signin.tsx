@@ -3,8 +3,8 @@ import { Lock, Mail } from 'lucide-react';
 
 
 const Signin = () => {
-    const [email, setemail] = useState("");
-    const [password, setpassword] = useState("");
+    const [email, setemail] = useState<string>("");
+    const [password, setpassword] = useState<string>("");
     
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-800 via-red-600 to-orange-400 flex items-center justify-center p-4">

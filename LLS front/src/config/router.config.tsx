@@ -8,14 +8,14 @@ import Signin from "../pages/signin/signin";
 
 
 
-const Routerconfig =() =>{
+export const Routerconfig =() =>{
     return(
         <>
         <BrowserRouter>
         <Routes>
             <Route path="/" element={<Landingpage/>}/>
             <Route path="/ourteam" element={<Ourteam/>}/>
-            <Route path="/aboutus" element={<Aboutuspage/>}/> 
+            <Route path="/about" element={<Aboutuspage/>}/> 
             <Route path="/areaofpractice" element={<Areasofpractice/>}/> 
             <Route path="/signin" element={<Signin/>} /> 
         </Routes>
@@ -24,5 +24,4 @@ const Routerconfig =() =>{
     )
 }
 
-export default Routerconfig;
 
