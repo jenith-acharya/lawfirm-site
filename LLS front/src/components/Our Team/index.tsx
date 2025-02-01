@@ -2,12 +2,12 @@ import { Card } from "flowbite-react";
 import drkumar from "../../../../../dr kumar.jpg";
 import radha from "../../../../../radha.jpg"
 import prerana from "../../../../../prerana.jpg"
-import  Heading  from "../common/title";
+import  Heading1  from "../common/title";
 
 const Ourteamcomponent = () => {
   return (
     <>
-    <Heading>Our Team</Heading>
+    <Heading1>Our Team</Heading1>
       <div className=" flex space-x-5 justify-center">
         <Card className="max-w-sm">
           <img
