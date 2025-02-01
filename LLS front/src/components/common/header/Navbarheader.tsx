@@ -17,7 +17,7 @@ export const Homeheader = () => {
       
       <Navbar.Collapse className="decoration-white ">
         <Navbar.Link className="text-[15px] text-white " href="/" active> HOME</Navbar.Link >
-        <Navbar.Link className="text-[15px] text-white " href="/about"> ABOUT US</Navbar.Link>
+        <Navbar.Link className="text-[15px] text-white " href="/aboutus"> ABOUT US</Navbar.Link>
         <Navbar.Link className="text-[15px] text-white " href="/ourteam"> OUR TEAM</Navbar.Link>
         <Navbar.Link className="text-[15px] text-white " href="/areaofpractice"> AREAS OF PRACTICE</Navbar.Link>
         <Navbar.Link className="text-[15px] text-white " href="/blogs"> BLOGS</Navbar.Link>

@@ -1,9 +1,13 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import Landingpage from './pages/landing'
-import "./index.css"
-createRoot(document.getElementById('root')!).render(
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import { Routerconfig } from "./config/router.config";
+import "./index.css";
+
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Landingpage />
-  </StrictMode>,
-)
+    <BrowserRouter>
+      <Routerconfig />
+    </BrowserRouter>
+  </StrictMode>
+);
