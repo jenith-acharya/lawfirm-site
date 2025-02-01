@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-export const Heading1 = ({ children }: { children: ReactNode }) => {
+const Heading1 = ({ children }: { children: ReactNode }) => {
   
   return (
     <>
@@ -12,3 +12,5 @@ export const Heading1 = ({ children }: { children: ReactNode }) => {
     </>
   );
 };
+
+export default Heading1;

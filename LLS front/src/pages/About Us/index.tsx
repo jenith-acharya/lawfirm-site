@@ -1,11 +1,14 @@
 import { Button } from "flowbite-react";
+import Heading  from "../../components/common/title";
 
 
 const Aboutuspage = () => {
     return(
         <>
+        <br/>
         
-        
+        <Heading>About Us</Heading>
+        <br/>
         <div className="flex items-center justify-between p-8 bg-gray-100">
             <div className="w-1/2">
                 <img 

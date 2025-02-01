@@ -5,10 +5,14 @@ import coandcommlitigation from "../../../../../corporate and commercial litigat
 import debt from "../../../../../debt recovery and insolvency matters.jpg";
 import developmentproject from "../../../../../development project disputes.jpg";
 import domesticandinternation from "../../../../../domestic and international arbiturites.webp";
+import Heading1 from "../../components/common/title";
 
 const Areasofpractice = () => {
   return (
     <>
+    <br/>
+    <Heading1>Areas Of Practice</Heading1>
+      <br/>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-7xl mx-auto p-4">
         <a href="google.com" className="block">
           {/* Card 1 */}

@@ -11,7 +11,7 @@ const Contactform = () => {
     }
 
     return (
-    
+    <><br/>
     <div className="grid sm:grid-cols-2 items-start gap-16 p-4 mx-auto max-w-4xl bg-white font-[sans-serif]">
             
             <div>
@@ -89,7 +89,9 @@ const Contactform = () => {
                     className="text-white bg-red-800 hover:bg-red-600 tracking-wide rounded-md text-sm px-4 py-3 w-full !mt-6">Send</button>
             </form>
         </div>
+        </>
   );
+
 }
 
 export default Contactform;

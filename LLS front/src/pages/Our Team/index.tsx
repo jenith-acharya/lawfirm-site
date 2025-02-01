@@ -1,5 +1,4 @@
 
-
 const OurTeam = () => {
   const teamMembers = [
     {
@@ -37,6 +36,7 @@ const OurTeam = () => {
   ];
 
   return (
+   
     <div className="bg-white py-12">
       <h2 className="text-center text-4xl font-bold text-gray-900">
         Our <span className="text-red-800">Team</span>
@@ -86,6 +86,7 @@ const OurTeam = () => {
         ))}
       </div>
     </div>
+    
   );
 };
 
