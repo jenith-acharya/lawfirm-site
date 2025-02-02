@@ -1,7 +1,9 @@
+import Breadcrumb from "../../components/breadcrumb navigation/breadcrumb component";
 
 const OurTeam = () => {
   const teamMembers = [
     {
+
       name: "Dr.Kumar Sharma Acharya",
       role: "Senior Partner",
       image: "https://scontent.fktm8-1.fna.fbcdn.net/v/t39.30808-6/461679693_505459262386075_259107169275803097_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=45mY2uTDnUwQ7kNvgHaK8LG&_nc_oc=Adg3CnH6iZNThvNY_osAFNNLRu2v7IHuuIVy0g9dLZEX6chNV60doieYa0TLP-rD_AWIgpIv5dgGq6A8jZWPG8Ku&_nc_zt=23&_nc_ht=scontent.fktm8-1.fna&_nc_gid=AO_lgulL_so59mU01o4t_1E&oh=00_AYDovy08vleMhMaDGAib6afsqPf4WMrds281dD8F0iaOwg&oe=6784940B", 
@@ -36,7 +38,8 @@ const OurTeam = () => {
   ];
 
   return (
-   
+   <>
+   <Breadcrumb>Our Team</Breadcrumb>
     <div className="bg-white py-12">
       <h2 className="text-center text-4xl font-bold text-gray-900">
         Our <span className="text-red-800">Team</span>
@@ -86,7 +89,7 @@ const OurTeam = () => {
         ))}
       </div>
     </div>
-    
+    </>
   );
 };
 

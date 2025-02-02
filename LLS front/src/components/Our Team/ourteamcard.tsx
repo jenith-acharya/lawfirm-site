@@ -7,6 +7,7 @@ import  Heading1  from "../common/title";
 const Ourteamcomponent = () => {
   return (
     <>
+    
     <Heading1>Our Team</Heading1>
       <div className=" flex space-x-5 justify-center">
         <Card className="max-w-sm">
