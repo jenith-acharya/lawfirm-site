@@ -1,31 +1,26 @@
+const { loginCheck } = require('../../middlewares/auth.middleware');
+const { hasPermission } = require('../../middlewares/rbac.miiddleware');
+const { setPath, uploadFile } = require('../../middlewares/uploader.middleware');
+const { bodyValidator } = require('../../middlewares/validator.middleware');
+const { practiceCreateDTO, practiceUpdateDTO } = require('./practice.request');
+const practiceController = require('./practice.controller');
+
 const router = require('express').Router();
 
-// Route to handle the base URL '/'
-router
-  .route('/')
-  .get((req, res) => {
-    // Code to fetch all practices
-    res.send("Get all practice areas");
-  })
-  .post((req, res) => {
-    // Code to add a new practice area
-    res.send("Add a new practice area");
-  });
+// Public routes
+router.get('/list-home', practiceController.listForHome);
 
-// Route to handle specific practice areas by ID or slug
-router
-  .route('/:practice')
-  .get((req, res) => {
-    // Code to fetch details of a specific practice area
-    res.send(`Get details of practice area: ${req.params.practice}`);
-  })
-  .patch((req, res) => {
-    // Code to update details of a specific practice area
-    res.send(`Update details of practice area: ${req.params.practice}`);
-  })
-  .delete((req, res) => {
-    // Code to delete a specific practice area
-    res.send(`Delete practice area: ${req.params.practice}`);
-  });
+// Count of practice areas
+router.get('/count', practiceController.countPractices);
+
+// Protected routes
+router.route('/')
+    .get(loginCheck, hasPermission(['admin']), practiceController.listForTable)
+    .post(loginCheck, hasPermission(['admin']), setPath('practices'), uploadFile().single('image'), bodyValidator(practiceCreateDTO), practiceController.createPractice);
+
+router.route('/:practice')
+    .get(practiceController.viewPractice)
+    .patch(loginCheck, hasPermission(['admin']), setPath('practices'), uploadFile().single('image'), bodyValidator(practiceUpdateDTO), practiceController.editPractice)
+    .delete(loginCheck, hasPermission(['admin']), practiceController.deletePractice);
 
 module.exports = router;

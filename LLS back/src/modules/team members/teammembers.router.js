@@ -1,31 +1,26 @@
-const router = require("express").Router();
+const { loginCheck } = require('../../middlewares/auth.middleware');
+const { hasPermission } = require('../../middlewares/rbac.miiddleware');
+const { setPath, uploadFile } = require('../../middlewares/uploader.middleware');
+const { bodyValidator } = require('../../middlewares/validator.middleware');
+const { teamMemberCreateDTO, teamMemberUpdateDTO } = require('./teammembers.request');
+const teamMemberController = require('./teammembers.controller');
 
-// Route to handle the base URL '/'
-router
-  .route('/')
-  .get((req, res) => {
-    // Code to handle GET request
-    res.send("Get all team members");
-  })
-  .post((req, res) => {
-    // Code to handle POST request
-    res.send("Add a new team member");
-  });
+const router = require('express').Router();
 
-// Route to handle '/:members' URL
-router
-  .route('/:members')
-  .get((req, res) => {
-    // Code to handle GET request for a specific member
-    res.send(`Get details of member: ${req.params.members}`);
-  })
-  .patch((req, res) => {
-    // Code to handle PATCH request for a specific member
-    res.send(`Update details of member: ${req.params.members}`);
-  })
-  .delete((req, res) => {
-    // Code to handle DELETE request for a specific member
-    res.send(`Delete member: ${req.params.members}`);
-  });
+// Public routes
+router.get('/list-home', teamMemberController.listForHome);
+
+// Count of team members
+router.get('/count', teamMemberController.countTeamMembers);
+
+// Protected routes
+router.route('/')
+    .get(loginCheck, hasPermission(['admin']), teamMemberController.listForTable)
+    .post(loginCheck, hasPermission(['admin']), setPath('teammembers'), uploadFile().single('image'), bodyValidator(teamMemberCreateDTO), teamMemberController.createTeamMember);
+
+router.route('/:member')
+    .get(teamMemberController.viewTeamMember)
+    .patch(loginCheck, hasPermission(['admin']), setPath('teammembers'), uploadFile().single('image'), bodyValidator(teamMemberUpdateDTO), teamMemberController.editTeamMember)
+    .delete(loginCheck, hasPermission(['admin']), teamMemberController.deleteTeamMember);
 
 module.exports = router;

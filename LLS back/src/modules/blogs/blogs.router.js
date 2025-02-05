@@ -1,41 +1,27 @@
+const { loginCheck } = require('../../middlewares/auth.middleware');
+const { hasPermission } = require('../../middlewares/rbac.miiddleware');
+const { setPath, uploadFile } = require('../../middlewares/uploader.middleware');
+const { bodyValidator } = require('../../middlewares/validator.middleware');
+const { blogCreateDTO, blogUpdateDTO } = require('./blogs.request');
+const blogController = require('./blogs.controller');
+
 const router = require('express').Router();
 
 // Public routes
-router.route('/api/blogs')
-  .get((req, res) => {
-    // Logic to fetch and return all blogs for public display
-    res.send("Fetch all blogs for public display");
-  });
+router.route('/')
+    .get(blogController.listBlogs);
 
-router.route('/api/blogs/:id')
-  .get((req, res) => {
-    // Logic to fetch and return a single blog by ID for public display
-    res.send(`Fetch blog with ID: ${req.params.id}`);
-  });
+router.route('/:id')
+    .get(blogController.viewBlog);
 
-// Admin panel routes
-router.route('/admin/blogs')
-  .get((req, res) => {
-    // Logic to fetch and return all blogs for management
-    res.send("Fetch all blogs for admin management");
-  })
-  .post((req, res) => {
-    // Logic to create a new blog post
-    res.send("Create a new blog post");
-  });
+// Admin protected routes
+router.route('/')
+    .get(loginCheck, hasPermission(['admin']), blogController.listBlogsForAdmin)
+    .post(loginCheck, hasPermission(['admin']), setPath('blogs'), uploadFile().single('image'), bodyValidator(blogCreateDTO), blogController.createBlog);
 
-router.route('/admin/blogs/:id')
-  .get((req, res) => {
-    // Logic to fetch a specific blog by ID for editing
-    res.send(`Fetch blog with ID: ${req.params.id} for editing`);
-  })
-  .patch((req, res) => {
-    // Logic to update a specific blog by ID
-    res.send(`Update blog with ID: ${req.params.id}`);
-  })
-  .delete((req, res) => {
-    // Logic to delete a specific blog by ID
-    res.send(`Delete blog with ID: ${req.params.id}`);
-  });
+router.route('/:id')
+    .get(loginCheck, hasPermission(['admin']), blogController.viewBlogForAdmin)
+    .patch(loginCheck, hasPermission(['admin']), setPath('blogs'), uploadFile().single('image'), bodyValidator(blogUpdateDTO), blogController.editBlog)
+    .delete(loginCheck, hasPermission(['admin']), blogController.deleteBlog);
 
 module.exports = router;
