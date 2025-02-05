@@ -109,7 +109,7 @@ class BlogController {
   // Delete a blog post by ID
   deleteBlog = async (req, res, next) => {
     try {
-      const { id } = req.params;
+      const {id}  = req.params;
       await blogService.deleteById(id);
 
       res.json({
