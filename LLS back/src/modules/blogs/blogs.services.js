@@ -11,10 +11,52 @@ class BlogService {
             throw exception;
         }
     };
-    
-    
-    
-    
+
+    // Get all blog posts with pagination and filtering
+    listBlogs = async (currentPage = 1, limit = 5, filter = {}) => {
+        try {
+            const skip = (currentPage - 1) * limit;
+            const total = await BlogModel.countDocuments(filter);
+            const totalPages = Math.ceil(total / limit);
+            const blogs = await BlogModel.find(filter)
+                .populate('createdBy', ["_id", "name", "email"])
+                .skip(skip)
+                .limit(limit)
+                .sort({ _id: 'desc' });
+
+            return { blogs, totalPages, total, limit, currentPage };
+        } catch (exception) {
+            throw exception;
+        }
+    };
+
+    // Get blog posts for landing page (simplified version)
+    landingPageBlogs = async (currentPage = 1, limit = 5, filter = {}) => {
+        try {
+            const skip = (currentPage - 1) * limit;
+            const totalBlogs = await BlogModel.countDocuments(filter);
+            const blogs = await BlogModel.find(filter).skip(skip).limit(limit);
+            const hasMore = skip + limit < totalBlogs;
+            
+            return { blogs, hasMore };
+        } catch (exception) {
+            throw exception;
+        }
+    };
+
+    // Get a single blog post by filter
+    getDetailByFilter = async (filter) => {
+        try {
+            const blogDetail = await BlogModel.findOne(filter).populate('createdBy', ['_id', 'name', 'email']);
+            if (!blogDetail) {
+                throw { statusCode: 404, message: "Blog post not found" };
+            }
+            return blogDetail;
+        } catch (exception) {
+            throw exception;
+        }
+    };
+
     // Delete a blog post by ID
     deleteById = async (id) => {
         try {
@@ -27,11 +69,11 @@ class BlogService {
             throw exception;
         }
     };
-    
-    // Update a blog post by ID
-    updateById = async (id, data) => {
+
+    // Update a blog post by title
+    updateBlogByTitle = async (title, data) => {
         try {
-            const response = await BlogModel.findByIdAndUpdate(id, data, { new: true });
+            const response = await BlogModel.findOneAndUpdate({ title }, data, { new: true });
             if (!response) {
                 throw { statusCode: 404, message: "Blog post not found" };
             }
@@ -40,29 +82,18 @@ class BlogService {
             throw exception;
         }
     };
-    
-    // Get details of a blog post by ID
-    getDetailById = async ({ _id }) => {
+
+    // Count total blog posts
+    countBlogs = async () => {
         try {
-            const blogDetail = await BlogModel.findById(_id).populate("createdby", ["_id", "name", "email"]);
-            if (!blogDetail) {
-                throw { statusCode: 404, message: "Blog post not found" };
-            }
-            return blogDetail;
-        } catch (exception) {
-            throw exception;
-        }
-    };
-    
-    // List all published blogs
-    listAllBlogs = async () => {
-        try {
-            return await BlogModel.find({}, { title: 1 });
+            return await BlogModel.countDocuments();
         } catch (exception) {
             throw exception;
         }
     };
 }
 
+// Create an instance of BlogService
 const blogService = new BlogService();
+
 module.exports = blogService;

@@ -3,7 +3,7 @@ const app = express();
 
 var morgan = require('morgan');
 const cors = require('cors');
-
+require('dotenv').config();
 
 require('./db.config')
 

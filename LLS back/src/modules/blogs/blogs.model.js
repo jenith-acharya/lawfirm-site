@@ -13,6 +13,10 @@ const BlogSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    description: {
+        type: String,
+        required: true
+    },
     createdby: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Team', // Assuming 'Team' is the collection for team members

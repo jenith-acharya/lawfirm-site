@@ -11,9 +11,37 @@ class PracticeService {
             throw exception;
         }
     };
-    
-   
-    
+
+    // List all practice areas with pagination and filtering
+    listPractices = async (currentPage = 1, limit = 5, filter = {}) => {
+        try {
+            const skip = (currentPage - 1) * limit;
+            const total = await PracticeModel.countDocuments(filter);
+            const totalPages = Math.ceil(total / limit);
+            const practices = await PracticeModel.find(filter)
+                .skip(skip)
+                .limit(limit)
+                .sort({ _id: 'desc' });
+
+            return { practices, totalPages, total, limit, currentPage };
+        } catch (exception) {
+            throw exception;
+        }
+    };
+
+    // Get details of a practice area by filter
+    getDetailByFilter = async (filter) => {
+        try {
+            const practiceDetail = await PracticeModel.findOne(filter);
+            if (!practiceDetail) {
+                throw { statusCode: 404, message: "Practice area not found" };
+            }
+            return practiceDetail;
+        } catch (exception) {
+            throw exception;
+        }
+    };
+
     // Delete a practice area by ID
     deleteById = async (id) => {
         try {
@@ -21,12 +49,12 @@ class PracticeService {
             if (!response) {
                 throw { statusCode: 404, message: "Practice area not found" };
             }
-            return response ;
+            return response;
         } catch (exception) {
             throw exception;
         }
     };
-    
+
     // Update a practice area by ID
     updateById = async (id, data) => {
         try {
@@ -39,29 +67,18 @@ class PracticeService {
             throw exception;
         }
     };
-    
-    // Get details of a practice area by ID
-    getDetailById = async ({ _id }) => {
+
+    // Count total practice areas
+    countPractices = async () => {
         try {
-            const practiceDetail = await PracticeModel.findById(_id).populate("createdby", ["_id", "name", "email"]);
-            if (!practiceDetail) {
-                throw { statusCode: 404, message: "Practice area not found" };
-            }
-            return practiceDetail;
-        } catch (exception) {
-            throw exception;
-        }
-    };
-    
-    // List all active practice areas
-    listAllPractices = async () => {
-        try {
-            return await PracticeModel.find({}, { title: 1 });
+            return await PracticeModel.countDocuments();
         } catch (exception) {
             throw exception;
         }
     };
 }
 
+// Create an instance of PracticeService
 const practiceService = new PracticeService();
+
 module.exports = practiceService;
