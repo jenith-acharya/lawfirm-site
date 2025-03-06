@@ -3,7 +3,6 @@ import Layout from "../layout/layout";
 import Landingpage from "../pages/landing";
 import Ourteam from "../pages/Our Team";
 import Areasofpractice from "../pages/Areasofpractice";
-import Aboutus from "../components/AboutUsCard";
 import Signin from "../pages/signin/signin";
 import Contact from "../pages/contactpage";
 import Aboutuspage from "../pages/About Us";

@@ -44,7 +44,7 @@ const Signin = () => {
                 <Lock className="h-5 w-5 text-gray-400" />
               </div>
               <input
-                type="password" value={password} onChange={(e:any)=> setpassword(e.target.value)}
+                type="password" value={password} onChange={(e:any)=> (setpassword(e.target.value))}
                 className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-800 focus:border-red-800 transition"
                 placeholder="••••••••"
               />
