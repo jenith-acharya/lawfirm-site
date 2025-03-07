@@ -4,7 +4,7 @@ import video from "../../../../../Lawyer video background 2 - Nature Relaxing Mu
 const Herosection = () => {
   return (
     <>
-      <div className="relative h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] w-full">
+      <div className="relative h-[400px] sm:h-[300px] md:h-[400px] lg:h-[500px] w-full">
         <video
           className="absolute top-0 left-0 w-full h-full object-cover"
           autoPlay
@@ -22,7 +22,7 @@ const Herosection = () => {
           </h2>
           <div className="flex justify-center mt-8">
             <Button 
-              href="/aboutus" 
+              href="/contact" 
               className="bg-red-800 px-6 py-3 text-lg sm:text-xl hover:bg-red-600 transition-transform duration-300 hover:scale-105"
             >
               CONSULT ONE OF OUR EXPERTS NOW

@@ -7,16 +7,14 @@ const AboutUs = () => {
     <section className="bg-gray-100 text-gray-800 py-16 px-6">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
         
-        {/* Image Section */}
         <div className="md:w-1/2">
           <img
-            src="https://source.unsplash.com/600x400/?law,legal" // Replace with your image URL
+            src="https://source.unsplash.com/600x400/?law,legal"
             alt="Legacy Legal Services"
             className="w-full rounded-lg shadow-lg"
           />
         </div>
 
-        {/* Text Content Section */}
         <div className="md:w-1/2">
           <h2 className="text-4xl font-bold text-red-800">About Us</h2>
           <p className="mt-4 text-lg">
@@ -57,7 +55,6 @@ const AboutUs = () => {
         </div>
       </div>
 
-      {/* Why Choose Us Section */}
       <div className="max-w-6xl mx-auto mt-16">
         <h3 className="text-3xl font-bold text-red-800 text-left">Why Legacy Legal Services?</h3>
         <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
@@ -76,7 +73,6 @@ const AboutUs = () => {
         </div>
       </div>
 
-      {/* Call to Action */}
       <div className="text-center mt-16">
         <h3 className="text-2xl font-semibold text-gray-800">Get in Touch</h3>
         <p className="text-gray-600 mt-2">
