@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
-const mailService = require("../../services/mail.service");
-const { randomStringGenerator, deleteFile } = require("../../utils/helper");
+const mailService = require("../../../services/mail.service");
+const { randomStringGenerator, deleteFile } = require("../../../utilis/helper");
 const TeamModel = require("./team.model");
 const { uploadImage } = require("../../config/cloudinary.config");
 

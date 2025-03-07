@@ -12,7 +12,6 @@ const authRouter = require('express').Router();
 
 
 //register user route
-authRouter.post('/register',setPath('users'),uploadFile().single('profile'),bodyValidator(userCreateDTO),authcontroller.registerUser)
 
 
 authRouter.post('/login',bodyValidator(LoginDTO),authcontroller.loginUser);
@@ -21,11 +20,8 @@ authRouter.get('/me',loginCheck,authcontroller.getLoggedInUser);
 
 
 
-authRouter.get('/activate/:token',authcontroller.activateUser);
 
-authRouter.get('/resend-activation-token/:token ',hasPermission(['admin','customer']),authcontroller.resendActivationToken)
 
-authRouter.get('/refresh-token',authcontroller.refreshToken)
 
 
 

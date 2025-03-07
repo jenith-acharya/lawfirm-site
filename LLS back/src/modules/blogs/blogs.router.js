@@ -1,5 +1,5 @@
 const { loginCheck } = require('../../middlewares/auth.middleware');
-const { hasPermission } = require('../../middlewares/rbac.miiddleware');
+const { hasPermission } = require('../../middlewares/rbac.middleware');
 const { setPath, uploadFile } = require('../../middlewares/uploader.middleware');
 const { bodyValidator } = require('../../middlewares/validator.middleware');
 const { blogCreateDTO, blogUpdateDTO } = require('./blogs.request');
