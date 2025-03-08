@@ -1,6 +1,6 @@
 const multer = require("multer");
 const fs = require("fs");
-const { randomStringGenerator } = require("../utils/helper");
+const { randomStringGenerator } = require("../../utilis/helper");
 const { fileFilterType } = require("../config/constants.config");
 
 // user,banner,brand,products

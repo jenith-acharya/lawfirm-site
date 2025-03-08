@@ -1,7 +1,7 @@
 const { loginCheck } = require('../../middlewares/auth.middleware');
 const { hasPermission } = require('../../middlewares/rbac.middleware');
 const { setPath, uploadFile } = require('../../middlewares/uploader.middleware');
-const { bodyValidator } = require('../../middlewares/validator.middleware');
+const { bodyValidator } = require('../../middlewares/validator.middlware');
 const { blogCreateDTO, blogUpdateDTO } = require('./blogs.request');
 const blogController = require('./blogs.controller');
 

@@ -1,4 +1,4 @@
-const teamService = require("../../services/teammember.services");
+const teamService = require("../team members/teammember.services");
 const TeamModel = require("./team.model");
 
 class TeamMemberController {
