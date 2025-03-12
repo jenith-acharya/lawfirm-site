@@ -5,14 +5,18 @@ const LoginDTO = joi.object({
     password : joi.string().required()
 });
 
-// const registerUserDTO = joi.object({
-//     fullName.
-//     email,
-//     password,
-//     confirmPassword.
-//     image,
-// })
+const registerUserDTO = joi.object({
+    fullName,
+    email,
+    password,
+    image,
+    role,
+    facebook,
+    linkedin,
+
+})
 
 module.exports= {
-    LoginDTO
+    LoginDTO,
+    registerUserDTO
 }

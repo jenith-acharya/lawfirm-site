@@ -1,7 +1,7 @@
 import React from "react";
 import law from "../../../../../Law.jpg";
 
-const Breadcrumbnavigation = ({ children }: { children: React.ReactNode }) => {
+const Breadcrumb = ({ children }: { children: React.ReactNode }) => {
   return (
     <div
       className="relative bg-cover bg-center h-64 flex items-center justify-center text-white"
@@ -23,4 +23,4 @@ const Breadcrumbnavigation = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default Breadcrumbnavigation;
+export default Breadcrumb;

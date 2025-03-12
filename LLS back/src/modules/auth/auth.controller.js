@@ -1,9 +1,10 @@
 const bcrypt = require('bcryptjs');
 const mailService = require('../../services/mail.service');
 const { randomStringGenerator } = require('../../utils/helper');
-const userService= require('../user/user.service');
+const teamService = require('../team members/teammember.services')
 const { statusType } = require('../../config/constants.config');
-const jwt = require ('jsonwebtoken')
+const jwt = require ('jsonwebtoken');
+const teamService = require('../team members/teammember.services');
 
 class AuthController{
 
@@ -13,11 +14,11 @@ class AuthController{
             const {email,password} =  req.body;
                 console.log(email,password);
             // access user 
-            const user = await userService.getSingleUserByFilter({email})
-                console.log(user);
-            if (bcrypt.compareSync(password,user.password)==true) {
-                if(user.status==statusType.ACTIVE || 'active'){
-                    const token = jwt.sign({sub:user._id}
+            const team = await teamService.getSingleUserByFilter({email})
+                console.log(team);
+            if (bcrypt.compareSync(password,team.password)==true) {
+                if(team.status==statusType.ACTIVE || 'active'){
+                    const token = jwt.sign({sub:team._id}
                     ,process.env.JWT_SECRET,
                     // {expiresIn:'1 day',algorithm:}
                       );
@@ -26,11 +27,11 @@ class AuthController{
 
                       res.json({
                         result:{
-                            userDetail:{
-                                _id:user._id,
-                               name:user.name,
-                               email:user.email,
-                               role:user.role,  
+                            teamDetail:{
+                                _id:team._id,
+                               name:team.name,
+                               email:team.email,
+                               role:team.role,  
                             },
                             token
                             },
@@ -56,15 +57,15 @@ class AuthController{
         
         let data = req.body;
         // data transformation
-          data = userService.transformUserCreate(req);
+          data = teamService.transformUserCreate(req);
 
          console.log(data);
          //Database store
-           const user = await userService.createUser(data)
+           const user = await teamService.createUser(data)
         
         //  sending mail service
         
-        await userService.sendActivationEmail(data);
+        await teamService.sendActivationEmail(data);
         
         
         // sending response
@@ -100,11 +101,11 @@ class AuthController{
             if (token.length !== 20){
                throw {statusCode: 422, message: 'Invalid activationToken'}
             }
-             const user =  await  userService.getSingleUserByFilter({activationToken:token});
-             console.log(user);
+             const team =  await  teamService.getSingleUserByFilter({activationToken:token});
+             console.log(team);
             
             const today = Date.now();
-            const activateFor = new Date(user.activatedFor).getTime();
+            const activateFor = new Date(team.activatedFor).getTime();
             // change the activateFor to date so we can compare with today variable
             console.log(today, activateFor);
             
@@ -112,10 +113,10 @@ class AuthController{
             if (today > activateFor){
                 throw {statusCode: 422, message: 'Token Expired'}
             }
-            user.activationToken = null;
-            user.activatedFor = null;
-            user.status = statusType.ACTIVE;
-            await user.save();   //insert or update
+            team.activationToken = null;
+            team.activatedFor = null;
+            team.status = statusType.ACTIVE;
+            await team.save();   //insert or update
 
             res.json({
                 result: null,
@@ -133,15 +134,15 @@ class AuthController{
 resendActivationToken = async (req,res,next)=>{
     try {
         const {token} = req.params;
-        const user = await userService.getSingleUserByFilter({token});
+        const team = await teamService.getSingleUserByFilter({token});
 
-         user = userService.generateUserActivationToken(user);
+         team = userService.generateUserActivationToken(team);
 
-         await user.save();  //insert or update
-        await userService.sendActivationEmail({
-            email: user.email,
-            activationToken: user.activationToken,
-            name: user.name,
+         await team.save();  //insert or update
+        await teamService.sendActivationEmail({
+            email: team.email,
+            activationToken: team.activationToken,
+            name: team.name,
             sub: 'User activation token'
         });
 
@@ -171,7 +172,7 @@ refreshToken = async (req,res,next)=>{
             throw {statusCode: 401, message: 'Refresh token required'}
         }
 
-        await userService.getSingleUserByFilter({_id:sub});
+        await teamService.getSingleUserByFilter({_id:sub});
 
         const accessToken = jwt.sign({sub},process.env.JWT_SECRET,{expiresIn:'1 day'});
         

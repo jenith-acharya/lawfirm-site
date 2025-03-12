@@ -4,16 +4,14 @@ const authcontroller = require('./auth.controller');
 const {setPath} = require('../../middlewares/uploader.middleware');
 const { loginCheck } = require('../../middlewares/auth.middleware');
 const {bodyValidator} = require('../../middlewares/validator.middleware');
-const { LoginDTO } = require('./auth.request');
-const { userCreateDTO } = require('../user/user.request');
+const { LoginDTO, registerUserDTO } = require('./auth.request');
 
 
 const authRouter = require('express').Router();
 
 
-//register user route
 
-
+authRouter.post('/register',bodyValidator(registerUserDTO),authcontroller.registerUser)
 authRouter.post('/login',bodyValidator(LoginDTO),authcontroller.loginUser);
 
 authRouter.get('/me',loginCheck,authcontroller.getLoggedInUser);
