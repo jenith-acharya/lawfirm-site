@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Menu, Users, BookOpen, Briefcase, Plus, Edit2, Trash2 } from 'lucide-react';
 
 interface Member {
