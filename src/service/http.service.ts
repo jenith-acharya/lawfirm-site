@@ -7,110 +7,148 @@ interface HeaderConfigProps {
   params?: SearchParams;
 }
 
+interface ErrorResponse {
+  message: string;
+  status: number;
+}
+
 class HttpService {
   private headers = {};
   private params = {};
 
+  // Set headers based on the configuration passed
   #setHeaders = (config: HeaderConfigProps) => {
-    // if config null set headers to default application/json
-    if (!config) {
-      this.headers = {
-        ...this.headers,
-        'Content-Type': 'application/json',
-        // "Content-Type": "application/json",
-      };
-    }
-    // if config is auth config set headers to bearer token
-    if (config && config.auth) {
-      // todo LOGIN TOKEN
-      // get token from local storage set bearer token to header
+    this.headers = { 'Content-Type': 'application/json' };
+
+    if (config && config?.auth) {
       const accessToken = localStorage.getItem("_at");
-      this.headers = {
-        ...this.headers,
-        Authorization: `Bearer ${accessToken}`,
-      };
-    }
-    // if config is file config set headers to multipart/form-data
-    if (config && config.file) {
-      this.headers = {
-        ...this.headers,
-        'Content-Type': 'multipart/form-data',
-      };
+      if (accessToken) {
+        this.headers = { ...this.headers, Authorization: `Bearer ${accessToken}` };
+      } else {
+        throw new Error("Authorization token missing");
+      }
     }
 
-    // if config is auth and set params
-    if (config && config.params) {
+    if (config && config?.file) {
+      this.headers = { ...this.headers, 'Content-Type': 'multipart/form-data' };
+    }
+
+    if (config?.params) {
       this.params = { ...config.params };
     }
   };
-  postRequest = async (url: string, data: any = {}, config: any = null) => {
+
+  // POST request method
+  postRequest = async (url: string, data: any = {}, config: HeaderConfigProps = {}) => {
     try {
       this.#setHeaders(config);
       const response = await axiosInstance.post(url, data, {
         headers: { ...this.headers },
+        params: { ...this.params }
       });
-
-      return response;
-    } catch (error) {
-      throw error;
+      return response.data;
+    } catch (error: any) {
+      this.#handleError(error);
     }
   };
-  getRequest = async (url: string, config: any = null) => {
+
+  // GET request method
+  getRequest = async (url: string, config: HeaderConfigProps = {}) => {
     try {
       this.#setHeaders(config);
-
-      //TODO params for get request
       const response = await axiosInstance.get(url, {
         headers: { ...this.headers },
         params: { ...this.params },
       });
-
-      return response;
+      return response.data;
     } catch (error: any) {
-      throw error?.data;
+      this.#handleError(error);
     }
   };
-  deleteRequest = async (url: string, config: any = null) => {
+
+  // DELETE request method
+  deleteRequest = async (url: string, config: HeaderConfigProps = {}) => {
     try {
       this.#setHeaders(config);
-
-      //TODO params for delete request
       const response = await axiosInstance.delete(url, {
         headers: { ...this.headers },
+        params: { ...this.params },
       });
-
-      return response;
+      return response.data;
     } catch (error: any) {
-      throw error?.data;
+      this.#handleError(error);
     }
   };
-  putRequest = async (url: string, data: any = {}, config: any = null) => {
+
+  // PUT request method
+  putRequest = async (url: string, data: any = {}, config: HeaderConfigProps = {}) => {
     try {
       this.#setHeaders(config);
       const response = await axiosInstance.put(url, data, {
         headers: { ...this.headers },
       });
-
-      return response;
-    } catch (error) {
-      throw error;
+      return response.data;
+    } catch (error: any) {
+      this.#handleError(error);
     }
   };
-  patchRequest = async (url: string, data: any = {}, config: any = null) => {
+
+  // PATCH request method
+  patchRequest = async (url: string, data: any = {}, config: HeaderConfigProps = {}) => {
     try {
       this.#setHeaders(config);
-
-    
       const response = await axiosInstance.patch(url, data, {
-        headers: {...this.headers},
+        headers: { ...this.headers },
       });
+      return response.data;
+    } catch (error: any) {
+      this.#handleError(error);
+    }
+  };
 
-      return response;
-    } catch (error) {
-      throw error;
+  // Forgot Password Request
+  forgotPasswordRequest = async ({ email, fullName }: { email: string; fullName: string }) => {
+    try {
+        this.#setHeaders({});
+        const response = await axiosInstance.post("/auth/forgot-password", { email, fullName }, {
+            headers: { ...this.headers },
+        });
+        return response.data;
+    } catch (error: any) {
+        this.#handleError(error);
+    }
+};
+
+  // Reset Password Request
+  resetPasswordRequest = async (data: { forgetToken?: string; newPassword: string; confirmPassword: string }) => {
+    try {
+      this.#setHeaders({});
+      const response = await axiosInstance.post("/auth/reset-password", data, {
+        headers: { ...this.headers },
+      });
+      return response.data;
+    } catch (error: any) {
+      this.#handleError(error);
+    }
+  };
+
+  // Centralized error handler
+  #handleError = (error: any) => {
+    if (error.response) {
+      const errorResponse: ErrorResponse = {
+        message: error.response.data.message || "An error occurred",
+        status: error.response.status,
+      };
+      console.error("Error Response:", errorResponse);
+      throw errorResponse;
+    } else if (error.request) {
+      console.error("No response received:", error.request);
+      throw new Error("Network error: No response received from the server");
+    } else {
+      console.error("Error Setting Up Request:", error.message);
+      throw new Error(`Error: ${error.message}`);
     }
   };
 }
 
-const httpService = new HttpService();
-export default httpService;
+export default HttpService;

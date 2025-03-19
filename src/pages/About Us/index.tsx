@@ -1,5 +1,5 @@
-import Breadcrumbnavigation from "../../components/breadcrumb navigation/breadcrumb component";
-
+import Breadcrumbnavigation from "../../components/common/breadcrumb navigation/breadcrumb component";
+import logo from "../../assets/public/logo.bmp"
 const AboutUs = () => {
   return (
     <>
@@ -9,7 +9,7 @@ const AboutUs = () => {
         
         <div className="md:w-1/2">
           <img
-            src="https://source.unsplash.com/600x400/?law,legal"
+            src={logo}
             alt="Legacy Legal Services"
             className="w-full rounded-lg shadow-lg"
           />
